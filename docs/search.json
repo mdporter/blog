@@ -1,0 +1,20 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About",
+      "description": "Some personal thoughts on COVID-19. ",
+      "author": [],
+      "contents": "\nHello world! I am Mike Porter, an Associate Professor in the School of Data Science and the Department of Engineering Systems and Environment at the University of Virginia. This blog contains a collections of short articles on data, models, and investigations related to the COVID-19 pandemic.\nYou can find out more about me from my various on-line identities\n\nGithub\n\nAcademic Webpage\nEngineering Faculty Webpage\nGoogle Scholar\nLinkedIn\nORCID\n\n\n\n\n\n\n\n",
+      "last_modified": "2020-12-31T16:30:15-05:00"
+    },
+    {
+      "path": "index.html",
+      "title": "Articles",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2020-12-31T16:30:16-05:00"
+    }
+  ],
+  "collections": ["posts/posts.json"]
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Data Science, Statistics, and COVID-19</title>
+    <link>https://mdporter.github.io/blog/</link>
+    <atom:link href="https://mdporter.github.io/blog/index.xml" rel="self" type="application/rss+xml"/>
+    <description>Understanding COVID-19 with Data Science and Statistics
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Thu, 31 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Don't Come Around Here No More or Party Like it's 1999</title>
+      <dc:creator>Michael D. Porter</dc:creator>
+      <link>https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk</link>
+      <description>Estimating the probability that someone at an event is unknowingly contagious with COVID-19. (Go with Prince or Petty?)</description>
+      <guid>https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk</guid>
+      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/covid-event-risk_files/figure-html5/fig1-1.png" medium="image" type="image/png" width="768" height="336"/>
+    </item>
+    <item>
+      <title>To SIR, with Love</title>
+      <dc:creator>Michael D. Porter</dc:creator>
+      <link>https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love</link>
+      <description>A brief introduction to the SIR model and what is tells us about the spread of COVID-19.</description>
+      <guid>https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love</guid>
+      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/to-sir-with-love_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="576" height="96"/>
+    </item>
+  </channel>
+</rss>

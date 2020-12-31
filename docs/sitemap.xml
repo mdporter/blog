@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
+  <url>
+    <loc>https://mdporter.github.io/blog/about.html</loc>
+    <lastmod>2020-05-16T13:29:59-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://mdporter.github.io/blog/</loc>
+    <lastmod>2020-05-16T09:26:17-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/</loc>
+    <lastmod>2020-12-31T16:27:31-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/</loc>
+    <lastmod>2020-05-16T14:36:31-04:00</lastmod>
+  </url>
+</urlset>

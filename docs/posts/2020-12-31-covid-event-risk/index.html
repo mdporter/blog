@@ -18,54 +18,121 @@
  <!--radix_placeholder_import_source-->
  <!--/radix_placeholder_import_source-->
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
   <!--radix_placeholder_meta_tags-->
-<title>Data Science, Statistics, and COVID-19: To SIR, with Love</title>
+<title>Data Science, Statistics, and COVID-19: Don't Come Around Here No More or Party Like it's 1999</title>
 
-<meta property="description" itemprop="description" content="A brief introduction to the SIR model and what is tells us about the spread of COVID-19."/>
+<meta property="description" itemprop="description" content="Estimating the probability that someone at an event is unknowingly contagious with COVID-19. (Go with Prince or Petty?)"/>
 
-<link rel="canonical" href="https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/"/>
+<link rel="canonical" href="https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/"/>
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2020-05-12"/>
-<meta property="article:created" itemprop="dateCreated" content="2020-05-12"/>
+<meta property="article:published" itemprop="datePublished" content="2020-12-31"/>
+<meta property="article:created" itemprop="dateCreated" content="2020-12-31"/>
 <meta name="article:author" content="Michael D. Porter"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Data Science, Statistics, and COVID-19: To SIR, with Love"/>
+<meta property="og:title" content="Data Science, Statistics, and COVID-19: Don&#39;t Come Around Here No More or Party Like it&#39;s 1999"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A brief introduction to the SIR model and what is tells us about the spread of COVID-19."/>
-<meta property="og:url" content="https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/"/>
-<meta property="og:image" content="https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/to-sir-with-love_files/figure-html5/unnamed-chunk-1-1.png"/>
-<meta property="og:image:width" content="576"/>
-<meta property="og:image:height" content="96"/>
+<meta property="og:description" content="Estimating the probability that someone at an event is unknowingly contagious with COVID-19. (Go with Prince or Petty?)"/>
+<meta property="og:url" content="https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/"/>
+<meta property="og:image" content="https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/covid-event-risk_files/figure-html5/fig1-1.png"/>
+<meta property="og:image:width" content="768"/>
+<meta property="og:image:height" content="336"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Data Science, Statistics, and COVID-19"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Data Science, Statistics, and COVID-19: To SIR, with Love"/>
-<meta property="twitter:description" content="A brief introduction to the SIR model and what is tells us about the spread of COVID-19."/>
-<meta property="twitter:url" content="https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/"/>
-<meta property="twitter:image" content="https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/to-sir-with-love_files/figure-html5/unnamed-chunk-1-1.png"/>
-<meta property="twitter:image:width" content="576"/>
-<meta property="twitter:image:height" content="96"/>
+<meta property="twitter:title" content="Data Science, Statistics, and COVID-19: Don&#39;t Come Around Here No More or Party Like it&#39;s 1999"/>
+<meta property="twitter:description" content="Estimating the probability that someone at an event is unknowingly contagious with COVID-19. (Go with Prince or Petty?)"/>
+<meta property="twitter:url" content="https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/"/>
+<meta property="twitter:image" content="https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/covid-event-risk_files/figure-html5/fig1-1.png"/>
+<meta property="twitter:image:width" content="768"/>
+<meta property="twitter:image:height" content="336"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
-<meta name="citation_title" content="Data Science, Statistics, and COVID-19: To SIR, with Love"/>
-<meta name="citation_fulltext_html_url" content="https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/"/>
-<meta name="citation_online_date" content="2020/05/12"/>
-<meta name="citation_publication_date" content="2020/05/12"/>
+<meta name="citation_title" content="Data Science, Statistics, and COVID-19: Don&#39;t Come Around Here No More or Party Like it&#39;s 1999"/>
+<meta name="citation_fulltext_html_url" content="https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/"/>
+<meta name="citation_online_date" content="2020/12/31"/>
+<meta name="citation_publication_date" content="2020/12/31"/>
 <meta name="citation_author" content="Michael D. Porter"/>
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","base_url","repository_url","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["To SIR, with Love"]},{"type":"character","attributes":{},"value":["A brief introduction to the SIR model and what is tells us about the spread of COVID-19."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Michael D. Porter"]},{"type":"character","attributes":{},"value":["https://faculty.virginia.edu/mdporter/"]}]}]},{"type":"character","attributes":{},"value":["05-12-2020"]},{"type":"character","attributes":{},"value":["https://mdporter.github.io/blog/"]},{"type":"character","attributes":{},"value":["https://github.com/mdporter/blog"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","toc_depth","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/"]},{"type":"character","attributes":{},"value":["https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","base_url","repository_url","output","draft","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Don't Come Around Here No More or Party Like it's 1999"]},{"type":"character","attributes":{},"value":["Estimating the probability that someone at an event is unknowingly contagious with COVID-19. (Go with Prince or Petty?)"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","orcid_id"]}},"value":[{"type":"character","attributes":{},"value":["Michael D. Porter"]},{"type":"character","attributes":{},"value":["https://faculty.virginia.edu/mdporter/"]},{"type":"character","attributes":{},"value":["0000-0001-9316-3578"]}]}]},{"type":"character","attributes":{},"value":["12-31-2020"]},{"type":"character","attributes":{},"value":["https://mdporter.github.io/blog/"]},{"type":"character","attributes":{},"value":["https://github.com/mdporter/blog"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/"]},{"type":"character","attributes":{},"value":["https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["to-sir-with-love_files/bowser-1.9.3/bowser.min.js","to-sir-with-love_files/distill-2.2.21/template.v2.js","to-sir-with-love_files/figure-html5/animation-1.gif","to-sir-with-love_files/figure-html5/SIR-tplot-1.png","to-sir-with-love_files/figure-html5/SIR-transition-1.png","to-sir-with-love_files/figure-html5/unnamed-chunk-1-1.png","to-sir-with-love_files/figure-html5/unnamed-chunk-10-1.png","to-sir-with-love_files/figure-html5/unnamed-chunk-3-1.png","to-sir-with-love_files/figure-html5/unnamed-chunk-5-1.png","to-sir-with-love_files/figure-html5/unnamed-chunk-7-1.png","to-sir-with-love_files/figure-html5/unnamed-chunk-8-1.png","to-sir-with-love_files/jquery-1.11.3/jquery.min.js","to-sir-with-love_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["covid-event-risk_files/anchor-4.2.2/anchor.min.js","covid-event-risk_files/bowser-1.9.3/bowser.min.js","covid-event-risk_files/distill-2.2.21/template.v2.js","covid-event-risk_files/figure-html5/fig1-1.png","covid-event-risk_files/figure-html5/unnamed-chunk-1-1.png","covid-event-risk_files/figure-html5/unnamed-chunk-3-1.png","covid-event-risk_files/figure-html5/unnamed-chunk-4-1.png","covid-event-risk_files/figure-html5/unnamed-chunk-4-2.png","covid-event-risk_files/jquery-1.11.3/jquery.min.js","covid-event-risk_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -1946,6 +2013,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!--/radix_placeholder_distill-->
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
@@ -1960,7 +2028,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"To SIR, with Love","description":"A brief introduction to the SIR model and what is tells us about the spread of COVID-19.","authors":[{"author":"Michael D. Porter","authorURL":"https://faculty.virginia.edu/mdporter/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-05-12T00:00:00.000-04:00","citationText":"Porter, 2020"}
+{"title":"Don't Come Around Here No More or Party Like it's 1999","description":"Estimating the probability that someone at an event is unknowingly contagious with COVID-19. (Go with Prince or Petty?)","authors":[{"author":"Michael D. Porter","authorURL":"https://faculty.virginia.edu/mdporter/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":"0000-0001-9316-3578"}],"publishedDate":"2020-12-31T00:00:00.000-05:00","citationText":"Porter, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1989,172 +2057,118 @@ document.addEventListener('DOMContentLoaded', function() {
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>To SIR, with Love</h1>
-<p><p>A brief introduction to the SIR model and what is tells us about the spread of COVID-19.</p></p>
+<h1>Don’t Come Around Here No More or Party Like it’s 1999</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>Estimating the probability that someone at an event is unknowingly contagious with COVID-19. (Go with Prince or Petty?)</p></p>
 </div>
 
 <div class="d-byline">
   Michael D. Porter <a href="https://faculty.virginia.edu/mdporter/" class="uri">https://faculty.virginia.edu/mdporter/</a> 
   
-<br/>05-12-2020
+<br/>12-31-2020
 </div>
 
 <div class="d-article">
-<h3 class="d-toc-header">Table of Contents</h3>
-<nav class="d-toc" id="TOC">
-<ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#sir">SIR</a><ul>
-<li><a href="#unpacking-sir">Unpacking SIR</a></li>
-<li><a href="#make-it-stop-herd-immunity-and-r_0">Make it stop: Herd Immunity and <span class="math inline">\(R_0\)</span></a></li>
-<li><a href="#dynamics">Changing the disease dynamics</a></li>
-</ul></li>
-<li><a href="#where-to-go-from-here">Where to go from here</a></li>
-</ul>
-</nav>
-<hr class="d-toc-separator"/>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
 <div class="layout-chunk" data-layout="l-body">
+<script type="text/x-mathjax-config"> 
+    MathJax.Hub.Config({ 
+        "HTML-CSS": { scale: 90, linebreaks: { automatic: true } }, 
+        SVG: { linebreaks: { automatic:true } }, 
+        displayAlign: "center" });
+</script>
+</div>
+<div class="layout-chunk" data-layout="l-body">
 
 </div>
-<h1 id="introduction">Introduction</h1>
+<h1 id="event-planning-during-covid-19">Event planning during COVID-19</h1>
 <blockquote>
-Pay attention a minute everybody, I’ve got an announcement to make. It’s about SIR.
+“Hey, don’t come around here no more.”
 <footer>
-Bert Denham, “To Sir, with Love”
+— Tom Petty
+</footer>
+“So tonight I’m gonna party like it’s 1999.”
+<footer>
+— Prince
 </footer>
 </blockquote>
-<p>Ok, ok, I know. Sir, played by Sidney Poitier in the classic movie, <a href="https://en.wikipedia.org/wiki/To_Sir,_with_Love">To Sir, with Love</a> is not the same as the S-I-R epidemiological model. But I needed a catchy title, and this was the first thing that popped into my head. It’s been a long time since I watched the movie, but I remember it being about a teacher who is able to reform his class of deviant youths. I don’t know if the following explanation will lead to a youth reform movement, but who knows? We are all stuck at home, and by this time you are probably thinking that your kid’s teacher was lying when they told you your child was a pleasure to have in class; so give it a try, maybe SIR will change your life too.</p>
-<h1 id="sir">SIR</h1>
-<p>The SIR model is one of the most basic models for describing the temporal dynamics of an infectious disease in a population. It compartmentalizes people into one of three categories: those who are <font color="#377eb8">Susceptible</font> to the disease, those who are currently <font color="#e41a1c">Infectious</font>, and those who have <font color="#4daf4a">Recovered</font> (with immunity). At its most basic level, the SIR model is a set of equations that describes the number (or proportion) of people in each compartment at every point in time. The SIR model is often represented with the following flow diagram that shows the three states (S, I, and R) and arrows depicting the direction of flow between the states.</p>
+<p>When considering whether to host or attend a gathering during the pandemic, it is helpful to have an idea about how risky the event is. One important aspect of this assessment is the probability that someone at the event will be <em>unknowingly</em> contagious with COVID-19. To help with this analysis, we have put together an <a href="https://darren-frye.shinyapps.io/EventRisk/">interactive dashboard</a> that will provide the <em>estimated probability that someone at the event will be contagious with COVID-19</em> based on the number of guests and location.</p>
+<h3 id="more-people-more-probability">More People, More Probability</h3>
+<p>Some people say “mo’ money, mo’ problems”, but with Covid-19 “mo’ people, mo’ probability” is more accurate. The more people at an event, the more likely <em>at least one</em> person is unknowingly infected and contagious. Figure <a href="#fig:fig1">1</a> show the probability that someone at an event is infected as a function of the number of people at the event and the percent of people in the region that are infected. At the time of writing, roughly 1% of the US is estimated to be unknowingly infected with COVID-19. This means that there is a 25% chance that someone is unknowingly infected (and contagious) in a gathering of 29 people randomly selected from the US.</p>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="figure" style="text-align: center"><span id="fig:fig1"></span>
+<img src="covid-event-risk_files/figure-html5/fig1-1.png" alt="Probability that at least one person at an event is infected." width="100%" />
+<p class="caption">
+Figure 1: Probability that at least one person at an event is infected.
+</p>
 </div>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="to-sir-with-love_files/figure-html5/unnamed-chunk-1-1.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
-<p>At this point in the pandemic, you may have seen the usual graphical output from a SIR model that shows the number (or proportion) of people in each state over time</p>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="to-sir-with-love_files/figure-html5/SIR-tplot-1.png" width="90%" style="display: block; margin: auto;" /></p>
-</div>
-<p>These curves come from the (continuous time) SIR model which specifies a set of three ordinary differential equations:</p>
+<p>To help calculate the probabilities, we use the <em>Complement Rule</em> from probability theory: the probability that at least one person is infected is one minus the probability that no one is infected. If <span class="math inline">\(p\)</span> is the proportion of a region that is infected, then <span class="math inline">\((1-p)^n\)</span> is the probability that <span class="math inline">\(n\)</span> randomly selected people from that region are all uninfected. And <span class="math inline">\(1-(1-p)^n\)</span> is then the probability that at least one of the <span class="math inline">\(n\)</span> people is infected.</p>
+<p>To be more accurate, since we are dealing with finite population and sampling without replacement, the number of people that are infected in a region more closely follows a <a href="https://en.wikipedia.org/wiki/Hypergeometric_distribution">hypergeometric distribution</a>. More details of the actual calculations are provided in the <a href="#hypergeo">Details Section</a>.</p>
+<h3 id="estimating-the-number-of-unknowingly-contagious-in-a-population">Estimating the number of unknowingly contagious in a population</h3>
+<p>We want to estimate the probability that someone at the event is <strong>unknowingly</strong> contagious. We use the term unknowingly because if anyone knows or suspects they are infected, we expect they will not attend. This implies that we want to estimate the likelihood that a person coming from a certain location is contagious, but either asymptomatic (won’t ever have any COVID-19 symptoms) or pre-symptomatic (will eventually get one or more COVID-19 symptoms). A major complication is that we don’t actually know how many people are infected at a given location and time, but only have data (and forecasts) about those that have been tested. To help us estimate the desired probabilities, we are using the <a href="https://www.cdc.gov/coronavirus/2019-ncov/hcp/planning-scenarios.html">CDC’s planning report</a>.</p>
+<aside>
+<a href="https://www.cdc.gov/coronavirus/2019-ncov/hcp/planning-scenarios.html#table-1">Table 1 of CDC’s planning report</a> estimates that 40% of COVID-19 infections are asymptomatic.
+</aside>
+<p>This requires estimating three components: i) the actual number of infected people from the observed positive tests (case counts), ii) the number of the infected, but asymptomatic, people who weren’t tested, and iii) the number of those that will be contagious during the event date. We describe each of these in turn.</p>
+<h2 id="estimating-the-actual-infections">Estimating the Actual Infections</h2>
+<p>Our first step is to estimate the actual number of infected people from the observed positive test data. We know that the actual number infected is greater than the positive test data; let’s say the actual number of infected people in a region will be roughly <span class="math inline">\(r\)</span> times the number of reported positive tests (with <span class="math inline">\(r&gt;1\)</span>). That is, if there are <span class="math inline">\(C_t\)</span> people who have a positive test on day <span class="math inline">\(t\)</span>, there are actually <span class="math inline">\(rC_t\)</span> people that would have had a positive test if they were tested. There are many reasons why people aren’t tested: they are asymptomatic and don’t know they are infected, they have mild symptoms and don’t want to bother with the time and expense of getting tested, they strongly suspect they are infected (e.g., one person in their household tested positive), testing isn’t available in their region, etc. It is also possible that an infected person is tested, but receives a negative result (i.e., false negative).</p>
+<aside>
+We estimate there are currently between <span class="math inline">\(3-5\)</span> times more people infected than reported.
+</aside>
+<p>What value should we use for <span class="math inline">\(r\)</span>? We have a few resources to guide us. First, the CDC cites a <a href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2768834">publication</a> that compared the number of people with COVID-19 antibodies to the number of positive tests. This gives an estimate of <span class="math inline">\(r=11\)</span> with a range of between 6 and 24 (see Table 3 in the article). However this study was conducted between March and April when testing availability was well below what it is today. This implies the rate today is potentially much less than what the paper reports. In fact, if we use <span class="math inline">\(r=11\)</span> today, we would find several US counties where there were more infections than people!</p>
+<p>Going about it another way, <span class="math inline">\(1/r\)</span> is the probability that someone infected with COVID-19 <em>is tested</em> (and is positive). Using the law of total probability, we can see that</p>
 <p><span class="math display">\[
-\frac{d S_t}{dt} = -\frac{\beta I_t S_t}{N}, \qquad \frac{d I_t}{dt} = \frac{\beta I_t S_t}{N} - \gamma I_t, \qquad \frac{d R_t}{dt} = \gamma I_t
+\begin{align}
+\Pr(\text{tested}) &amp;= \Pr(\text{tested} \mid \text{asymp}) \Pr(\text{asymp}) + \Pr(\text{tested} \mid \text{symp}) \Pr(\text{symp})\\\\
+\frac{1}{r} &amp;= \Pr(\text{tested} \mid \text{asymp}) \cdot 40\% + \Pr(\text{tested} \mid \text{symp}) \cdot 60\%
+\end{align}
 \]</span></p>
-<p>Do I need to say more? As the saying goes,“An equation is worth a thousand words”. But for reader who would rather look at pictures than equations, I’ll try to make these equations a bit more understandable (in less than 1000 words).</p>
-<h2 id="unpacking-sir">Unpacking SIR</h2>
-<p>Instead of diving straight into the equations, let’s dip our toes in the water and think about how an epidemic works from the first infection. At the very beginning, a contagious person enters a population full of susceptible people. Unless they are quarantined, they move about in the population potentially infecting some of the susceptible population. The SIR model is not very sophisticated in how it models the interactions between members of a population. It assumes the infected people can mix with anyone in the population with equal likelihood; there are no geographic, demographic, or other factors that separate members of a real population. <!-- It also treats all infectious people the same ... too sick, ... --> <!-- It models the interaction between infected and susceptible people with a (uniform) random process.  --> Every day a contagious person will randomly move around the population infecting any susceptible person they come into close enough contact with. Let’s say a contagious person will come into close contact with (and cough on, sneeze on, kiss, etc.) an average of <span class="math inline">\(\beta\)</span> (<em>beta</em>) people each day; if those people are susceptible (i.e., not immune) they will become infected otherwise they will just benefit from the close contact. If there are <span class="math inline">\(S_t\)</span> susceptible people on day <span class="math inline">\(t\)</span>, the expected number infected by our carrier is <span class="math inline">\(\beta S_t / N\)</span>, where <span class="math inline">\(S_t/N\)</span> is the probability a close contact is with a susceptible person.</p>
-<p>Our infectious carrier will continue this process of randomly contacting people each day until they are no longer contagious (either by recovery or death). Suppose that every day a contagious person has probability <span class="math inline">\(\gamma\)</span> (<em>gamma</em>) of becoming non-contagious. Some readers will recognize that this specifies a <a href="https://en.wikipedia.org/wiki/Geometric_distribution"><em>geometric distribution</em></a> for the length of time an infected person is contagious. One property of this model is that the average number of days that someone stays contagious is <span class="math inline">\(1/\gamma\)</span>.</p>
-<p>Notice that we have specified two model parameters: <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span>. Because these are greek letters you know they are important! Combined, they make another parameter you may have heard of, the <span class="math inline">\(R_0\)</span> (“R nought”). The <span class="math inline">\(R_0\)</span>, known as the <a href="https://en.wikipedia.org/wiki/Basic_reproduction_number">basic reproductive number</a>, is defined as the expected number of people infected from a contagious person over the length of their contagiousness (in a fully susceptible population). If you were paying attention and keeping notes, you may be able to work out that <span class="math inline">\(R_0 = \beta/\gamma\)</span> which is the expected number of close contacts per day (<span class="math inline">\(\beta\)</span>) multiplied by the average number of days contagious (<span class="math inline">\(1/\gamma\)</span>). If <span class="math inline">\(R_0 &gt; 1\)</span> (or equivalently, <span class="math inline">\(\beta &gt; \gamma\)</span>), then we will likely have an epidemic on our hands as each infected person will infect more than one other on average, who will infect more than one other, and so on (i.e., exponential growth) until we reach herd immunity (but more on that later).</p>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="to-sir-with-love_files/figure-html5/animation-1.gif" width="80%" style="display: block; margin: auto;" /></p>
-</div>
-<p>“But what about those equations”, you ask. And I’m glad you asked because math is fun! So far we have described how one contagious person moves through the system randomly infecting people each day until they are no longer contagious. But now let’s bring in the dynamics since we are all in this together (literally). Refer back to the SIR ODE equations, they describe the <em>change</em> in counts at an instance of time. We can consider a discrete time version of these equations that describe the changes each day using the concepts described above. I should note that this will give an approximation of the actual SIR output (and there are better approximations then the one described below). However, don’t let this disrupt your sleep; remember that the SIR model is only an approximation of reality and a discrete time perspective is, in my opinion, a better representation than continuous time (e.g., humans don’t randomly mix for 24 hours each day, data is reported daily, etc). Also keep in mind that the model parameters must be estimated, so the fitted curve for the discrete time version should be similar to the continuous time version (even if the estimated parameter values are slightly different).</p>
-<p>For notation, take <span class="math inline">\(S_t, I_t, R_t\)</span> as the number of Susceptible, Infectious, and Removed people in the population on day <span class="math inline">\(t\)</span>. The total population size <span class="math inline">\(N\)</span> is assumed to stay constant over the observation period and is equal to the sum of all counts (i.e., <span class="math inline">\(N = S_t + I_t + R_t\)</span>). This discrete time version of the SIR model specifies the equations: <span class="math display">\[
- S_{t+1} - S_t = -\frac{\beta I_t S_t}{N}, \qquad I_{t+1} - I_t = \frac{\beta I_t S_t}{N} - \gamma I_t, \qquad R_{t+1} - R_t = \gamma I_t
-\]</span> This shows that the three SIR equations describe how the counts in each category change in one day. Consider the change in the number of infectious; it is the sum of two components: <span class="math display">\[
+<p>which will let us estimate <span class="math inline">\(r\)</span> by estimating the probabilities that asymptomatic and symptomatic people are tested. If 1/50 asymptomatic people are tested and 1/3 of the symptomatic people are tested, then <span class="math inline">\(r = 4.8\)</span>. If 1/2 of the symptomatic people are tested, then drops down to <span class="math inline">\(r = 2.8\)</span>. But if only 1/5 of the symptomatic are tested, then <span class="math inline">\(r=6.8\)</span>. These numbers will also change if something other than 40% of the population is asymptomatic.</p>
+<p>The last approach we consider is that by Youyang Gu, who runs <a href="https://covid19-projections.com/" class="uri">https://covid19-projections.com/</a> which is one of the <a href="https://github.com/youyanggu/covid19-forecast-hub-evaluation">top performing COVID forecasting models</a>. Gu, recognizing that <span class="math inline">\(r\)</span> will change over time and location as testing becomes more available and acceptable, has <a href="https://covid19-projections.com/estimating-true-infections-revisited/">created an equation</a> to estimate <span class="math inline">\(r\)</span> based on a region’s positivity rate (percent of tests that are positive). As an example, on Dec 15, 2020 a region with a 10% positivity rate is estimated to have <span class="math inline">\(r=3.0\)</span>. If the positivity rate is 20%, then <span class="math inline">\(r=3.4\)</span>.</p>
+<p>Based on these observations, we believe <span class="math inline">\(3 \le r \le 5\)</span> is a good range for most locations at the time of this writing (Dec 2020).</p>
+<h2 id="estimating-the-number-of-asymptomatics">Estimating the Number of Asymptomatics</h2>
+<p>On day <span class="math inline">\(t\)</span> we estimate <span class="math inline">\(X_t = C_t(r-1)\)</span> people are infected but not tested. Of these <em>non-tested</em> people, we are most concerned with estimating the proportion that are asymptomatic; they won’t know they are infected. How do we estimate this? Bayes Theorem, of course: <span class="math display">\[
 \begin{align}
-I_{t+1} - I_t &amp;= \text{newly infectious} - \text{removed} \\
-&amp;= \frac{\beta I_t S_t}{N} - \gamma I_t \\
-&amp;= I_t \left(\beta S_t/N - \gamma \right)
+\Pr(\text{asymp} \mid \text{no test} ) &amp;= \frac{\Pr(\text{no test} \mid \text{asymp}) \Pr(\text{asymp})}{\Pr(\text{no test})} \\\\
+&amp;= \frac{(1-\Pr(\text{tested} \mid \text{asymp})) \cdot 40\%}{1-\frac{1}{r}}
 \end{align}
-\]</span> The last line makes clear that this term just multiplies what we described above for a single infectious person by <span class="math inline">\(I_t\)</span>, the total number of infectious people at time <span class="math inline">\(t\)</span>. In other words, if <em>one</em> infectious person is expected to infect <span class="math inline">\(\beta S_t / N\)</span> other people on day <span class="math inline">\(t\)</span>, then <span class="math inline">\(I_t\)</span> infectious people are expected to infect <span class="math inline">\(I_t \cdot (\beta S_t / N)\)</span> on day <span class="math inline">\(t\)</span>. Likewise, if each infectious person has probability <span class="math inline">\(\gamma\)</span> of recovery or death on day <span class="math inline">\(t\)</span>, then the expected total number of infected people that recover (or die) on day <span class="math inline">\(t\)</span> is <span class="math inline">\(I_t \gamma\)</span>.</p>
-<p>We can also examine the first term, corresponding to the number of newly infectious people, with a slightly different formulation <span class="math display">\[
-\begin{align}
-\text{newly infectious}  &amp;= \left(\frac{\beta I_t}{N}\right) S_t \\
-&amp;= f_t S_t
-\end{align}
-\]</span> As a reminder, <span class="math inline">\(\beta\)</span> is the <em>transmission parameter</em> and it controls the rate that infectious people can spread the disease (larger values of <span class="math inline">\(\beta\)</span> imply faster spread). The second line makes it explicit that the number of newly infected people at time <span class="math inline">\(t+1\)</span> is proportional to the number of susceptible people at time <span class="math inline">\(t\)</span>. Specifically, <span class="math inline">\(f_t=\beta I_t /N\)</span> is referred to as the <em>force of infection</em> and is the <em>fraction of susceptible people who become infectious during time t</em>. Notice that <span class="math inline">\(f_t\)</span> depends on both the transmission parameter <span class="math inline">\(\beta\)</span> and the proportion of people who are infectious at time <span class="math inline">\(t\)</span>.</p>
-<p>The second term in the equation for the change in infectious people models the number of infectious people that are removed (i.e., recover with immunity or die): <span class="math display">\[
-\begin{align}
-\text{removed}  &amp;= \gamma I_t
-\end{align}
-\]</span> The <span class="math inline">\(\gamma \in [0,1]\)</span> parameter is the fraction of infectious people that are removed each day. When <span class="math inline">\(\gamma\)</span> is large, people will recover (or die) quickly and won’t have as much time to infect the susceptible population. However when <span class="math inline">\(\gamma\)</span> is small, people stay infectious longer and have more opportunity to infect others. Because this model is based on expected values, we can consider the separation of <span class="math inline">\(\gamma\)</span> into two sub-components to handle deaths and recoveries separately (e.g., <span class="math inline">\(\gamma = p_{\text{death}} \gamma_{\text{death}} + (1-p_{\text{death}})\gamma_{\text{recovery}}\)</span>).</p>
-<p>If you look back at the SIR equations you’ll notice that the change in susceptibles and removed are based on the two components we just described. That is, the change in susceptibles is minus the number of newly infected and the change in removed is the number of newly recovered. This ensures that total number of people in all bins is always equal to <span class="math inline">\(N\)</span>.</p>
-<p>For the visually inclined, here is my attempt to represent the flow of counts between times <span class="math inline">\(t\)</span> and <span class="math inline">\(t+1\)</span>. The equations above the arrows show the fraction of the counts in the left side bin that get transferred to the right side bin with color indicating if the count is positive (black) or negative (red).</p>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="to-sir-with-love_files/figure-html5/SIR-transition-1.png" width="50%" style="display: block; margin: auto;" /></p>
-</div>
-<p>Notice that the flow out of each bin must sum to 1 to preserve the required property that total counts must equal the population size. Look now at the bins on the right side. Because <span class="math inline">\(S_{t+1}\)</span> only gets a negative flow it will only decrease (or stay the same) over time. The number of removed at time <span class="math inline">\(t+1\)</span>, <span class="math inline">\(R_{t+1}\)</span> only gets positive flow and will only increase (or stay the same) over time. The situation for the number of infectious, <span class="math inline">\(I_{t+1}\)</span> is different in that it can increase or decrease over time.</p>
-<p>Hopefully this provides you with a little better understanding of the SIR model. It also reveals that the quote is wrong - an equation must be worth <em>more than</em> 1000 words since I have probably reached that limit and still have a few more things to say about herd immunity and <span class="math inline">\(R_0\)</span>.</p>
-<h2 id="make-it-stop-herd-immunity-and-r_0">Make it stop: Herd Immunity and <span class="math inline">\(R_0\)</span></h2>
-<p>Let’s concentrate on the number of infectious individuals and write out explicitly the estimate for time <span class="math inline">\(t+1\)</span>: <span class="math display">\[
-\begin{align}
-I_{t+1} &amp;= I_t + \left(\frac{\beta I_t}{N}\right) S_t - \gamma I_t \\
-&amp;= I_t \left(1 + \beta\frac{S_t}{N}  - \gamma \right)
-\end{align}
-\]</span> This shows that <span class="math inline">\(I_{t+1}\)</span>, the number of infectious tomorrow, can be expressed as a multiple of the number of infectious today. This leads to the following conditions that determine if the number of infections is increasing, decreasing, or at its peak based on the two model parameters <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span> as well as the proportion of the population that is susceptible <span class="math inline">\(S_t/N\)</span>. <span class="math display">\[
-\begin{alignat}{2}
-\beta\frac{ S_t}{N} \; &amp;&gt; \; \gamma \qquad &amp;&amp;\text{Infectious Count Increasing} \\
-\beta\frac{ S_t}{N} \; &amp;= \; \gamma \qquad &amp;&amp;\text{Peak Infectious Count} \\
-\beta\frac{ S_t}{N}   \; &amp;&lt; \; \gamma \qquad &amp;&amp;\text{Infectious Count Decreasing} 
-\end{alignat}
 \]</span></p>
-<p>The peak of the epidemic will occur when the proportion of susceptible people is equal to the ratio <span class="math inline">\(\gamma/\beta\)</span> <span class="math display">\[
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Using <span class="math inline">\(\Pr(\text{tested} \mid \text{asymp}) = 1/50\)</span> (one out of 50 asymptomatic people are tested and receive a positive result) specifies that <span class="math inline">\(\Pr(\text{asymp} \mid \text{no test}) = 52.3\%\)</span> (using <span class="math inline">\(r=4\)</span>). This means that about 52% of the <span class="math inline">\(X_t\)</span> infected people who aren’t tested are completely asymptomatic and will have no idea that they can spread the virus.</p>
+<aside>
+Between 49% - 59% of infected but non-tested people will have no idea they may be contagious.
+</aside>
+<h2 id="estimating-the-number-of-unknowingly-contagious-at-the-event">Estimating the number of unknowingly contagious at the event</h2>
+<p>Equipped with estimates for <span class="math inline">\(r\)</span> (ratio of infected to tested) and the probability that a non-tested person is asymptomatic we now turn to the estimation of the number of people that won’t know they are contagious during the event. Assuming that everyone that receives a positive test or has symptoms won’t attend an event, we only need to consider the people that will be contagious during the event, but either asymptomatic or pre-symptomatic. We describe our initial approach at this which captures people that have been infected several days prior to the event, but caution that this leaves out people that could have been recently exposed.</p>
+<p>Our premise is that at time <span class="math inline">\(t\)</span>, <span class="math inline">\(C_t\)</span> infected people were tested and received a positive result however, because not everyone who is infected is tested, there are roughly an additional <span class="math inline">\(X_t = C_t(r-1)\)</span> people who were <em>infected around the same time as those that were tested</em>. About <span class="math inline">\(X_t \cdot 0.52\)</span> of these people are asymptomatic and <span class="math inline">\(X_t \cdot (1-0.52)\)</span> will have symptoms. Because the <span class="math inline">\(X_t\)</span> folks who weren’t tested were exposed around the same time as the <span class="math inline">\(C_t\)</span> people who were tested, we assume that by time <span class="math inline">\(t\)</span> most of these symptomatic people will have developed symptoms. This suggests that only the <span class="math inline">\(X_t \cdot 0.52\)</span> asymptomatic people will be completely unaware that they are infected with COVID-19.</p>
+<p>But how long will this unknowingly infected population be contagious? The <a href="https://www.cdc.gov/coronavirus/2019-ncov/hcp/duration-isolation.html#assessment">CDC suggests</a> that most people with mild to moderate symptoms will be contagious for no more than 10 days after symptoms first appear. For asymptomatic people, the contagious period is <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7240269/">probably less</a>. But there is also a delay between symptom onset and test results. If we assume about 3 days between symptom onset and test results then someone that tests positive on day <span class="math inline">\(t\)</span> could be contagious for up to <span class="math inline">\(n=7\)</span> days later. The people that weren’t tested on day <span class="math inline">\(t\)</span> but still infected (e.g., due to being asymptomatic or just not tested) are also assumed to be contagious for <span class="math inline">\(n=7\)</span> more days. Thus, our final estimate of the number of unknowingly contagious people on day <span class="math inline">\(t\)</span> is the sum of case counts on the most recent <span class="math inline">\(n=7\)</span> days (<span class="math inline">\(\sum_{u=0}^6 C_{t-u}\)</span>), multiplied by the factor that estimates the number of infected people who weren’t tested (<span class="math inline">\(r-1\)</span>), and further multiplied by the probability that a person who wasn’t tested is asymptomatic (52.3%): <span class="math display">\[
+\begin{aligned}
+\text{Number unknowingly contagious on day } t &amp;= (r-1)\cdot 52.3\% \cdot \sum_{u=0}^6 C_{t-u} 
+%&amp;= 52.3\% \cdot \sum_{u=0}^6 X_{t-u}
+\end{aligned}
+\]</span></p>
+<aside>
+We model that contagiousness lasts for around 10 days after symptom onset and 7 days after being testing.
+</aside>
+<h3 id="whos-missing">Who’s missing</h3>
+<p>This approach doesn’t account for everyone who could spread the virus. The people that were recently exposed, but not far enough along to develop symptoms are not fully incorporated in our model. Because our model is based on case counts and there is a lag between exposure and test results, there will be some contagious people who aren’t fully accounted for in our model. We hope to include these cases in the future by incorporating forecasts into our model.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h1 id="hypergeo">The Details</h1>
+<p>Let there be <span class="math inline">\(N\)</span> people in a population (e.g., county) at time <span class="math inline">\(t\)</span>. Suppose that <span class="math inline">\(C\)</span> know they are infected and <span class="math inline">\(X\)</span> are infected but are unaware they are. Assuming the <span class="math inline">\(C\)</span> people who know they infected won’t attend an event, there are <span class="math inline">\(N-C\)</span> non-infected people and <span class="math inline">\(X\)</span> unknowingly infected people in the population who could attend an event. What is the probability that in a group of <span class="math inline">\(n\)</span> randomly selected people none are infected? <span class="math display">\[
 \begin{align}
-\frac{ S_t}{N} &amp;= \frac{\gamma}{\beta} = \frac{1}{R_0} \qquad \text{Peak Conditions}
+\Pr(\text{none infected at event}) &amp;= \frac{(N-C-X)!}{(N-C-X-n)!}\frac{(N-C-n)!}{(N-C)!} \\
+&amp;\approx (1-X/N)^n \qquad \text{when $N$ is large}
 \end{align}
-\]</span> which shows one reason <span class="math inline">\(R_0 = \beta/\gamma\)</span>, the “R nought” value mentioned above, is a prominent part of the discussion.</p>
-<p>Let’s examine this in more detail. According to the SIR model, the peak of the infection, that is the day when the number of infected people is greatest, is the first day when the proportion of susceptible peoples fall below <span class="math inline">\(1/R_0\)</span>. Equivalently, this suggests the <em>epidemic will peak when the cumulative proportion of the population that has been infected exceeds</em> <span class="math inline">\(1-1/R_0\)</span>. This is what is meant by the term <em>herd immunity</em> - when the fraction of the population that is immune reaches a large enough level that the number infected starts to decline.</p>
-<p>A recent <a href="https://coronavirus.jhu.edu/from-our-experts/early-herd-immunity-against-covid-19-a-dangerous-misconception">post by epidemiologists at Johns Hopkins University</a> suggests that the US is not close to herd immunity. Below is a plot that shows, according to the SIR model, the percentage of a population that needs to be immune before it reaches herd immunity for a given <span class="math inline">\(R_0\)</span> value.</p>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="to-sir-with-love_files/figure-html5/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
-</div>
-<p>The Johns Hopkins article suggests about 70% of the US needs to be immune to reach herd immunity; this would put <span class="math inline">\(R_0= 3.33\)</span>. There are all sorts of estimates on <span class="math inline">\(R_0\)</span> for COVID-19, but most that I have seen range between 1.5 and 6.5 (which will of course vary region to region and over time).</p>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<h2 id="dynamics">Changing the disease dynamics</h2>
-<p>Now that you know something of the SIR model, it can be insightful to consider how the dynamics change under different strategies. Here are three things a population may consider doing to limit the number of peopled infected with COVID-19</p>
-<ol type="1">
-<li>Reduce the transmission rate (decrease <span class="math inline">\(\beta\)</span>)</li>
-<li>Reduce the length of time that someone is contagious (increase <span class="math inline">\(\gamma\)</span>)</li>
-<li>Reduce the number of susceptible people (decrease <span class="math inline">\(S_1\)</span>)</li>
-</ol>
-<p>Below is a plot that shows how the infection dynamics are impacted under each strategy. The left facet shows the percentage of the population that is infectious (<span class="math inline">\(I_t/N\)</span>) and the right facet gives the percentage of population that has been infected (<span class="math inline">\((I_t + R_t)/N\)</span>). The baseline model uses <span class="math inline">\(\beta=0.30, \gamma=1/10\)</span> (<span class="math inline">\(R_0 = 3.0\)</span>) in a population of 100,000 people. This implies that each infectious individual will come into contagiously close contact with an average of 0.30 people per day and will stay contagious for an average of 10 days. On day 1, there is a single infectious person leaving <span class="math inline">\(S_1=99{,}999\)</span> susceptible, and <span class="math inline">\(R_1=0\)</span> recovered. Strategy 1 reduces <span class="math inline">\(\beta=0.25\)</span>, Strategy 2 increases <span class="math inline">\(\gamma=1/8\)</span> (contagious for 8 days on average), and Strategy 3 considers that 10% of the population is immune on day 1 (<span class="math inline">\(S_1=90{,}000\)</span>).</p>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="to-sir-with-love_files/figure-html5/unnamed-chunk-5-1.png" width="95%" style="display: block; margin: auto;" /></p>
-</div>
-<p>Social distancing policies, limitations on group sizes, and quarantines are used to reduce the transmission rate (decrease <span class="math inline">\(\beta\)</span>). This action has been taken by most governments around the world to limit the number of people who are infected and results in a “flattening of the curve” as shown by Strategy 1 in the plot. This strategy forces the peak down (and therefore reduces hospital overcrowding), but extends the total outbreak duration. As can be seen from the cumulative plot on the right, it also reduces the total percentage of the population that will be infected.</p>
-<p>The second strategy is to reduce the time someone is infectious (increase <span class="math inline">\(\gamma\)</span>). This could be accomplished by medications, supplements, nutrition, exercise, and other treatments. <a href="https://www.niaid.nih.gov/news-events/nih-clinical-trial-shows-remdesivir-accelerates-recovery-advanced-covid-19">Remdesivir, for example, may reduce the infectious period for up to 4 days on average</a>. In this hypothetical scenario, the SIR model suggests that even a 2 day reduction in the time someone is infectious can have a large impact in the peak number of infections and total number of people infected.</p>
-<p>The third strategy is to reduce the susceptible population. This refers to a vaccine, which doesn’t yet exist for COVID-19. According to this SIR model a 10% vaccination rate would not only lead to a reduction in the peak infectious count but also provide the largest reduction in total number of infections (out the three scenarios).</p>
-<p>Hopefully, this sheds some light on the different public health responses you have been hearing about in the headlines. There are more variations on the types of mitigation efforts available and certainly better models in which to evaluate how such efforts will impact the disease, but these three strategies and the basic SIR model will take you far in understanding how it all works.</p>
-<h1 id="where-to-go-from-here">Where to go from here</h1>
-<p>The purpose of this article is to provide a brief introduction to the SIR model and explain a few of its properties. Hopefully this has cleared up some of the confusion surrounding terms you have been hearing about in the news and also given you a bit more insight into how a compartmental epidemic model works. It may have also left you with other questions and concerns; I’ll outline a few thoughts on where to go next.</p>
-<p>The first thing worth mentioning is that the SIR model is undoubtedly wrong in the sense that it doesn’t explain all the complexities and dynamics in the COVID-19 pandemic. But as <a href="https://en.wikipedia.org/wiki/All_models_are_wrong">George Box famously said</a> “All models are wrong, but some are useful”. And the SIR model can be useful in many ways. First, it is a good starting place for understanding the more complex models. Also, never forget that the parameters of these models must be estimated. A simple model can provide better predictions than a more realistic (and complex) model when there is not enough data or the data quality is poor. And we are dealing with both sparsity and quality issues in the COVID-19 data. This is an often under-appreciated aspect of modeling and data analysis.</p>
-<p>Nevertheless, I’d say the basic SIR model is too simplistic to be used for accurate modeling of the COVID pandemic. Fortunately, there are several relatively simple ways to improve it. First, we can consider that the transmission parameter <span class="math inline">\(\beta\)</span> (and hence <span class="math inline">\(R_0\)</span>) can change over time, especially due to social distancing and stay at home regulations. I would be skeptical of any COVID-19 model that didn’t account for changes in the transmission rate, especially with the unprecedented movement restrictions we have seen around the world. Here is a simple analysis that shows how the infectious counts respond if the transmission parameter <span class="math inline">\(\beta\)</span> is abruptly changed during the course of the epidemic.</p>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="to-sir-with-love_files/figure-html5/unnamed-chunk-7-1.png" width="85%" style="display: block; margin: auto;" /></p>
-</div>
-<p>The baseline scenario is the same as what was considered in <a href="#dynamics">Changing the Disease Dynamics section</a>, <span class="math inline">\(\beta=0.30, \gamma=1/10\)</span> (<span class="math inline">\(R_0 = 3.0\)</span>). The other scenarios consider that <span class="math inline">\(\beta\)</span> is reduced to <span class="math inline">\(0.20\)</span> on a certain day (e.g., due to a shelter in place order). The top left panel is the baseline scenario. The other panels show how the infectious rate varies if the intervention occurs at different time points in the course of the epidemic. The black line is provided as a reference to the baseline scenario. These plots reveal that early changes in the transmission rate have the strongest effect. A change close to the herd immunity induced peak (bottom right panel) has very little effect.</p>
-<p>The basic SIR model is deterministic. This means that once the model parameters (<span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span>) are specified there is no randomness in the model output. This is apparent by considering that all transitions between compartments are specified by expected values and not probability distributions. One consequence of this is that no uncertainty is represented in the model output - something that can lead to poor decision making. Uncertainty in the model output can be estimated with Monte Carlo simulation of a <em>stochastic</em> SIR model. In a stochastic SIR, instead of modeling exactly <span class="math inline">\(f_t S_t\)</span> newly infectious on day <span class="math inline">\(t+1\)</span>, the number of newly infectious is randomly determined according to a <a href="https://en.wikipedia.org/wiki/Binomial_distribution">Binomial distribution</a> (<span class="math inline">\(\text{Bino}(n=S_t, p=f_t)\)</span>). Likewise, the number of infectious people that recover is no longer exactly <span class="math inline">\(\gamma I_t\)</span>, but randomly determined according to the <a href="https://en.wikipedia.org/wiki/Binomial_distribution">Binomial distribution</a> (<span class="math inline">\(\text{Bino}(n=I_t, p=\gamma)\)</span>). The stochastic SIR will produce a different set of curves every time it is simulated. To get a sense of the uncertainty, the stochastic SIR can be simulated 100’s or 1000’s of times. For example, below is the result of running a stochastic version of the SIR model 100 times.</p>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="to-sir-with-love_files/figure-html5/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<p>Notice that while the peak number of infectious is very consistent (around 31.2K), the timing of the peak has much greater variability, starting as early as day 58 in one simulation and including one simulation that doesn’t reach the peak until day 93. A word of caution: the stochastic SIR only addresses the uncertainty in the model output, but doesn’t address the uncertainty in estimating the model parameters (i.e., it assumes <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span> are known exactly). Parameter uncertainty, especially early in the outbreak when data is limited, will have an even greater influence on how precisely we can make predictions. Making decisions under uncertainty is the rule rather than the exception for this pandemic!</p>
-<p>There are <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology">many other compartmental models</a> that extend SIR. The closest is the SEIR model that splits out the infected population into two sub-groups, those who are infected but not yet contagious and those who are infectious. The SEIR model is very similar to the SIR model, but <font color="#377eb8">Susceptible</font> people who become infected move first move into the <font color="#984ea3">Exposed</font> group. There is one additional parameter that controls how long a person stays in the <font color="#984ea3">Exposed</font> group before they move into the <font color="#e41a1c">Infectious</font> state.</p>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="to-sir-with-love_files/figure-html5/unnamed-chunk-10-1.png" width="60%" style="display: block; margin: auto;" /></p>
-</div>
-<p>The basic framework can be extended to include more detailed compartments and transitions, like having separate parameters for different age groups or how likely people from different geographic locations will interact, etc. For very complex model specifications, <a href="https://www.sciencedirect.com/science/article/pii/S1755436517300221">Agent-Based Models (ABM)</a> can be employed to understand the corresponding disease dynamics. You can think of an ABM as a type of stochastic compartmental model on steroids; it can capture very complex population behavior using agents that follow relatively simple rules (e.g., leave home between 8-9am, go to work, stop for groceries once per week, go out to eat 2 times per week) and can have individual disease progression (e.g., an older agent has higher probability of becoming hospitalized).</p>
-<p>I’ll close this article with mention of an all together different way to estimate epi-curves is with a pattern-based or curve fitting approach. This is the approach taken by <a href="https://covid19.healthdata.org/united-states-of-america">Institute for Health Metrics and Evaluation</a> and is based on the observation that over a wide range of parameter values, the SIR/SEIR models maintain a similar <em>shape</em>. For example, notice from the plots above that the curves representing the number/percentage of infectious people look rather bell-shaped. For those of you who have taken a Statistics course, the mention of “bell-shaped” will evoke the wonderful memories of the <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central Limit Theorem</a> and the <a href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian or Normal distribution</a>. The <a href="%5D(https://ihmeuw-msca.github.io/CurveFit/methods/)">IHME modelers</a> exploit this observation and directly estimate the parameters of a <a href="https://en.wikipedia.org/wiki/Gaussian_function">Gaussian shaped</a> epi-curve. This approach offers a different way to estimate model parameters (e.g., using fatality data) with a focus on forecasting.</p>
+\]</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2180,12 +2194,12 @@ I_{t+1} &amp;= I_t + \left(\frac{\beta I_t}{N}\right) S_t - \gamma I_t \\
   <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/mdporter/blog/issues/new">create an issue</a> on the source repository.</p>
   <h3 id="citation">Citation</h3>
   <p>For attribution, please cite this work as</p>
-  <pre class="citation-appendix short">Porter (2020, May 12). Data Science, Statistics, and COVID-19: To SIR, with Love. Retrieved from https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/</pre>
+  <pre class="citation-appendix short">Porter (2020, Dec. 31). Data Science, Statistics, and COVID-19: Don't Come Around Here No More or Party Like it's 1999. Retrieved from https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/</pre>
   <p>BibTeX citation</p>
-  <pre class="citation-appendix long">@misc{porter2020to,
+  <pre class="citation-appendix long">@misc{porter2020don't,
   author = {Porter, Michael D.},
-  title = {Data Science, Statistics, and COVID-19: To SIR, with Love},
-  url = {https://mdporter.github.io/blog/posts/2020-05-12-to-sir-with-love/},
+  title = {Data Science, Statistics, and COVID-19: Don't Come Around Here No More or Party Like it's 1999},
+  url = {https://mdporter.github.io/blog/posts/2020-12-31-covid-event-risk/},
   year = {2020}
 }</pre>
 </div>
